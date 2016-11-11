@@ -1,0 +1,247 @@
+﻿@model NDVida_Site.Models.RegisterViewModel
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "registerform" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div id="content" role="main">
+
+        <div class="page-header dark larger larger-desc" style="background-image:url('/images/header/bg-cabecalho-1-2268x200px.jpg')">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 style="color:#FFFFFF"><br /><br /></h1>
+                    </div><!-- End .col-md-6 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-wrapper">
+                        <h2 class="title-underblock custom mb40">Registro</h2>
+                        
+                        <p>O processo de Bem Estar da NDVIDA é oferecido apenas para empresas. Para fazer o registro e criar uma conta, você deve ser previamente autorizado por sua empresa, ou empresa patrocinadora, a se registrar para este processo.</p>
+                        <p>Nos campos abaixo “Código da Empresa” e “Seu E-mail”, entre com o código da empresa como está no e-mail que recebeu com a autorização de participação.</p>
+
+                        <div class="row">
+                            <div class="col-sm-12 ">
+                                <div class="form-group">
+                                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label for="name" class="input-desc">Código da Empresa</label>
+                                    @Html.TextBoxFor(m => m.CodigoEmpresa, new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label for="name" class="input-desc">Nome</label>
+                                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label for="lastname" class="input-desc">Sobrenome</label>
+                                    @Html.TextBoxFor(m => m.Sobrenome, new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label for="email" class="input-desc">Seu E-mail</label>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label for="remail" class="input-desc">Confirmar seu E-mail</label>
+                                    @Html.TextBoxFor(m => m.ConfirmeEmail, new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label class="input-desc">Data de Nascimento</label>
+                                    <div class="input-group date form-date" data-date="" data-date-format="dd/mm/yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                        @Html.TextBoxFor(m => m.DataNascimento,
+                                        new
+                                        {
+                                            data_mask = "00/00/0000",
+                                            data_mask_clearifnotmatch = "true",
+                                            size = "16",
+                                            @class = "form-control"
+                                        })
+                                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                    </div><!-- End .input-group -->
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label class="input-desc">Gênero</label>
+
+                                    @Html.DropDownListFor(m => m.Genero, Enum.GetValues(typeof(NDVida_Site.Models.Genero)).Cast<NDVida_Site.Models.Genero>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }), new { @class = "form-control" })
+
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label for="mobile" class="input-desc">Telefone Comercial</label>
+                                    @Html.TextBoxFor(m => m.TelefoneComercial, new { data_mask = "(00) 0000-0000", @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label for="phone" class="input-desc">Celular</label>
+                                    @Html.TextBoxFor(m => m.TelefoneCelular, new { data_mask = "(00) 00000-0000", @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label for="address" class="input-desc">Endereço Comercial</label>
+                                    @Html.TextBoxFor(m => m.EnderecoComercial, new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                            <div class="col-sm-3 ">
+                                <div class="form-group">
+                                    <label for="address2" class="input-desc">Cidade</label>
+                                    @Html.TextBoxFor(m => m.CidadeComercial, new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-3 -->
+                            <div class="col-sm-3 ">
+                                <div class="form-group">
+                                    <label for="address2" class="input-desc">Estado</label>
+                                    @Html.DropDownListFor(m => m.EstadoComercial, Enum.GetValues(typeof(NDVida_Site.Models.Estado)).Cast<NDVida_Site.Models.Estado>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }), new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-3 -->
+
+                        </div><!-- End .row -->
+
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label class="input-desc">País</label>
+                                    <select class="form-control" id="PaisComercial" name="PaisComercial">
+                                        <option value="Brasil">Brasil</option>
+                                    </select>
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label for="address" class="input-desc">Endereço Residencial (opcional)</label>
+                                    @Html.TextBoxFor(m => m.EnderecoResidencial, new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                            <div class="col-sm-3 ">
+                                <div class="form-group">
+                                    <label for="address2" class="input-desc">Cidade</label>
+                                    @Html.TextBoxFor(m => m.CidadeResidencial, new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-3 -->
+                            <div class="col-sm-3 ">
+                                <div class="form-group">
+                                    <label for="address2" class="input-desc">Estado</label>
+                                    @Html.DropDownListFor(m => m.EstadoResidencial, Enum.GetValues(typeof(NDVida_Site.Models.Estado)).Cast<NDVida_Site.Models.Estado>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }), new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-3 -->
+
+                        </div><!-- End .row -->
+
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label class="input-desc">País</label>
+                                    <select class="form-control" id="PaisResidencial" name="PaisResidencial">
+                                        <option value="Brasil">Brasil</option>
+                                    </select>
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+
+                        <div class="mb20"></div><!-- space -->
+
+                        <div class="row">
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label class="input-desc">Senha</label>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                            <div class="col-sm-6 ">
+                                <div class="form-group">
+                                    <label class="input-desc">Confirmar Senha</label>
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                </div><!-- End .from-group -->
+                            </div><!-- End .col-sm-6 -->
+                        </div><!-- End .row -->
+
+
+                        <div class="mb20"></div><!-- space -->
+
+
+                        <div class="form-group mt15-r">
+                            @Html.CheckBoxFor(m => m.AceitaContratoNDVida)
+                            <span style="color:#F37020">Aceito o contrato e os <a href="javascript:window.open('/termos.html', '_blank');" style="color:#F37020"><u>termos de adesão</u></a>.</span>
+                        </div><!-- End .form-group -->
+
+
+                        <div class="form-group mb5">
+                            <input type="submit" id="btnRegistrar" class="btn btn-custom" value="Registrar" style="background-color:#F37020;">
+                        </div><!-- End .from-group -->
+
+                    </div><!-- End .form-wrapper -->
+
+                </div><!-- End .col-sm-12 -->
+
+
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+
+        <div class="mb30 mb10-xs"></div><!-- space -->
+
+    </div><!-- End #content -->
+}
+
+<script>
+    $(document).ready(function () {
+        $("#registerform").submit(function () {
+            $("#btnRegistrar").attr("disabled", true);
+            return true;
+        });
+    });
+</script>
+
+@if (ViewBag.UsuarioRegistro != null && (bool)ViewBag.UsuarioRegistro == true)
+{
+    <script language="javascript" type="text/javascript">
+        $("#registerform input").prop("disabled", true);
+
+        alert('Usuário registrado com sucesso, verifique seu email para ativar a conta');
+
+        window.open("http://www.ndvida.com.br", "_self");
+    </script>
+}
