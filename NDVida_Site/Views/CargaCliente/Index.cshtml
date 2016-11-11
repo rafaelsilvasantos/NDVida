@@ -1,0 +1,87 @@
+﻿@model NDVida_Site.Models.CargaClienteViewModel
+
+@using (Html.BeginForm("Index", "CargaCliente", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.AntiForgeryToken()
+
+    <div id="content" role="main">
+
+        <div class="page-header dark larger larger-desc" style="background-image:url('images/ndvida/bg-cabecalho-1-2268x200px.jpg')">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 style="color:#FFFFFF"><br/><br/></h1>
+                    </div><!-- End .col-md-6 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-wrapper">
+                        <h2 class="title-underblock custom mb30">Carga Cliente</h2>
+                        <div class="form-group">
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                        </div><!-- End .from-group -->
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-wrapper">
+                        <div class="form-group">
+                            <label for="username" class="input-desc">Código Empresa</label>
+                            @Html.TextBoxFor(m => m.CodigoEmpresa, new { @class = "form-control" })
+                        </div><!-- End .from-group -->
+                        <div class="form-group">
+                            <label for="username" class="input-desc">Código Campanha</label>
+                            @Html.TextBoxFor(m => m.CodigoCampanha, new { @class = "form-control" })
+                        </div><!-- End .from-group -->
+                        <div class="form-group mb10">
+                            <label for="arquivo" class="input-desc">Planilha</label>
+                            <input type="file" name="arquivo" id="arquivo" />
+                        </div><!-- End .from-group -->
+                        <div class="form-group mb10">
+                            <input type="submit" value="Efetuar carga" />
+                        </div><!-- End .from-group -->
+
+                    </div><!-- End .form-wrapper -->
+
+                </div><!-- End .col-sm-6 -->
+
+                <div class="mb40 visible-xs"></div><!-- space -->
+
+            </div><!-- End .row -->
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-wrapper">
+                        @if (Model.ListaMensagemProcessamento != null)
+                        {
+                            foreach (var item in Model.ListaMensagemProcessamento)
+                            {
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @item
+                            </div>
+                        </div>
+                            }
+                        }
+                        <br />
+                    </div>
+                </div>
+            </div>
+
+
+        </div><!-- End .container -->
+
+    </div>
+
+}
